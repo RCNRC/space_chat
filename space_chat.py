@@ -1,8 +1,6 @@
-from pathlib import Path
-from urllib.parse import urlparse
+from base_scripts import download_image
 from dotenv import dotenv_values
 import datetime
-import os
 import requests
 
 
@@ -33,28 +31,12 @@ def fetch_nasa_apod(api_token, images_number=40):
             download_image(image_url=image["url"], image_name=f"nasa_apod_{iters}")
 
 
-def get_image_type(image_url):
-    parsed_url = urlparse(image_url)
-    (_, ext) = os.path.splitext(parsed_url.path)
-    return ext
-
-
 def fetch_spacex_last_launch(news_id="latest"):
     response = requests.get(url=f"https://api.spacexdata.com/v5/launches/{news_id}")
     response.raise_for_status()
     images_url = response.json()["links"]["flickr"]["original"]
     for iters, image_url in enumerate(images_url):
         download_image(image_url=image_url, image_name=f"spacex_{iters}")
-
-
-def download_image(image_url, image_name, image_directory="./images", params=None):
-    response = requests.get(url=image_url, params=params)
-    response.raise_for_status()
-
-    if not os.path.exists(image_directory):
-        Path(image_directory).mkdir(parents=True, exist_ok=True)
-    with open(f"{image_directory}/{image_name}{get_image_type(image_url)}", 'wb') as fh:
-        fh.write(response.content)
 
 
 def main():
