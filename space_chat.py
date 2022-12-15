@@ -31,7 +31,7 @@ def fetch_nasa_apod(api_token, images_number=40):
             download_image(image_url=image["url"], image_name=f"nasa_apod_{iters}")
 
 
-def fetch_spacex_last_launch(news_id="latest"):
+def fetch_spacex_images(news_id="latest"):
     response = requests.get(url=f"https://api.spacexdata.com/v5/launches/{news_id}")
     response.raise_for_status()
     images_url = response.json()["links"]["flickr"]["original"]
@@ -41,7 +41,7 @@ def fetch_spacex_last_launch(news_id="latest"):
 
 def main():
     download_image(image_url="https://dvmn.org/media/HST-SM4.jpeg", image_name="Hubble")
-    fetch_spacex_last_launch(news_id="5eb87d47ffd86e000604b38a")
+    fetch_spacex_images(news_id="5eb87d47ffd86e000604b38a")
     api_token = dotenv_values(".env")["NASA_API_KEY"]
     fetch_nasa_apod(api_token)
     fetch_nasa_epyc(api_token=api_token)
