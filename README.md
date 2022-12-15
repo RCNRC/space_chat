@@ -40,6 +40,20 @@ python3 tg_bot.py 2
 python3 tg_bot.py
 ```
 
+# tg_post_file.py
+
+Это python скрипт, публикующий файл в чат.  
+Скрипт имеет один необязательный позиционный параметр: название публикуемого файла. Если не указано, то будет выбран случайно один из файлов в папке "images".  
+Использование: запустить файл как python скрипт.  
+Пример использования с выбранным файлом `file`:
+```commandline
+python3 tg_post_file.py file
+```  
+Пример использования с выбором случайного файла из папки `images`:
+```commandline
+python3 tg_post_file.py
+```
+
 # fetch_spacex_images.py
 
 Это python скрипт. Скачивает фотографии с сайта [SpaceX](https://github.com/r-spacex/SpaceX-API) и помещает их в папку `images`.  

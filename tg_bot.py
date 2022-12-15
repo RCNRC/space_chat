@@ -17,7 +17,7 @@ def posting_random_image(bot, chat_id, directory="images", hours_num=4):
     files = next(files)[2]
     shuffle(files)
     for file in files:
-        bot.send_document(chat_id=chat_id, document=open(f"images/{file}", 'rb'))
+        bot.send_document(chat_id=chat_id, document=open(f"{directory}/{file}", 'rb'))
         time.sleep(hours_num*60*60)
     posting_random_image(bot=bot, chat_id=chat_id, directory=directory, hours_num=hours_num)
 
