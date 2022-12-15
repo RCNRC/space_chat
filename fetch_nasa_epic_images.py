@@ -1,9 +1,10 @@
 from base_scripts import download_image
+from dotenv import dotenv_values
 import datetime
 import requests
 
 
-def fetch_nasa_epyc_images(api_token, images_number=10):
+def fetch_nasa_epic_images(api_token, images_number=10):
     api_endpoint = "https://api.nasa.gov/EPIC/api/natural"
     api_archive_endpoint = "https://api.nasa.gov/EPIC/archive/natural/"
     payload = {"api_key": f"{api_token}"}
@@ -20,5 +21,10 @@ def fetch_nasa_epyc_images(api_token, images_number=10):
         )
 
 
+def main():
+    api_token = dotenv_values(".env")["NASA_API_KEY"]
+    fetch_nasa_epic_images(api_token=api_token)
+
+
 if __name__ == '__main__':
-    pass
+    main()
