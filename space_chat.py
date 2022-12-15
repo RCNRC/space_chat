@@ -1,4 +1,5 @@
 from base_scripts import download_image
+from fetch_spacex_images import fetch_spacex_images
 from dotenv import dotenv_values
 import datetime
 import requests
@@ -29,14 +30,6 @@ def fetch_nasa_apod(api_token, images_number=40):
     for iters, image in enumerate(response.json()):
         if(image["media_type"]=="image"):
             download_image(image_url=image["url"], image_name=f"nasa_apod_{iters}")
-
-
-def fetch_spacex_images(news_id="latest"):
-    response = requests.get(url=f"https://api.spacexdata.com/v5/launches/{news_id}")
-    response.raise_for_status()
-    images_url = response.json()["links"]["flickr"]["original"]
-    for iters, image_url in enumerate(images_url):
-        download_image(image_url=image_url, image_name=f"spacex_{iters}")
 
 
 def main():
