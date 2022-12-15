@@ -18,3 +18,7 @@ def fetch_nasa_epyc_images(api_token, images_number=10):
             image_url=f"{api_archive_endpoint}{date_time.year}/{date_time.month}/{date_time.day}/png/{image_id}.png",
             image_name=f"nasa_epyc_{i}", params=payload
         )
+
+
+if __name__ == '__main__':
+    pass
