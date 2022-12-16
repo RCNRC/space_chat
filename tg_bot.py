@@ -6,6 +6,10 @@ from random import shuffle
 import time
 
 
+def get_environment_argument(default_value):
+    return int(os.getenv('HOURS_NUM')) if os.getenv('HOURS_NUM') else default_value
+
+
 def get_arguments():
     parser = argparse.ArgumentParser(description="Script starts the telegram bot.")
     parser.add_argument('hours_num', nargs='?', default=4, help="the number of hours between file uploads.")
@@ -21,7 +25,7 @@ def post_images(bot, chat_id, hours_num, directory="images", ):
             document = file_handler.read()
         bot.send_document(chat_id=chat_id, document=document)
         time.sleep(hours_num*60*60)
-        hours_num = int(os.getenv('HOURS_NUM')) if os.getenv('HOURS_NUM') else hours_num
+        hours_num = get_environment_argument(default_value=hours_num)
     post_images(bot=bot, chat_id=chat_id, directory=directory, hours_num=hours_num)
 
 
