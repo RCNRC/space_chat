@@ -7,8 +7,8 @@ import time
 
 
 def get_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('hours_num', nargs='?')
+    parser = argparse.ArgumentParser(description="Script starts the telegram bot.")
+    parser.add_argument('hours_num', nargs='?', help="the number of hours between file uploads.")
     return parser.parse_args()
 
 

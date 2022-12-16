@@ -17,8 +17,8 @@ def post_file(bot, chat_id, file, directory="images"):
 
 
 def get_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('file', nargs='?')
+    parser = argparse.ArgumentParser(description="Script posts file in telegram chat.")
+    parser.add_argument('file', nargs='?', help="this is the name of the file that will be sent to the telegram chat.")
     return parser.parse_args()
 
 

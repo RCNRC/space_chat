@@ -4,8 +4,8 @@ import argparse
 
 
 def get_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('news_id', nargs='?')
+    parser = argparse.ArgumentParser(description="Script downloads images from SpaceX news in \"./image\" directory.")
+    parser.add_argument('news_id', nargs='?', help="this is a unique identifier for the news of SpaceX company.")
     return parser.parse_args()
 
 
