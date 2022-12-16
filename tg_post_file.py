@@ -12,7 +12,8 @@ def get_random_file(directory):
 
 
 def post_file(bot, chat_id, file, directory="images"):
-    file = file if (file and os.path.isfile(f"{directory}/{file}")) else get_random_file(directory=directory)
+    if (not file) or (not os.path.isfile(f"{directory}/{file}")):
+        file = get_random_file(directory=directory)
     with open(f"{directory}/{file}", 'rb') as file_handler:
         document = file_handler.read()
     bot.send_document(chat_id=chat_id, document=document)
