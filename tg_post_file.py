@@ -13,7 +13,9 @@ def get_random_file(directory):
 
 def post_file(bot, chat_id, file, directory="images"):
     file = file if (file and os.path.isfile(f"{directory}/{file}")) else get_random_file(directory=directory)
-    bot.send_document(chat_id=chat_id, document=open(f"{directory}/{file}", 'rb'))
+    with open(f"{directory}/{file}", 'rb') as file_handler:
+        document = file_handler.read()
+    bot.send_document(chat_id=chat_id, document=document)
 
 
 def get_arguments():

@@ -17,7 +17,9 @@ def post_images(bot, chat_id, hours_num, directory="images", ):
     files = next(files)[2]
     shuffle(files)
     for file in files:
-        bot.send_document(chat_id=chat_id, document=open(f"{directory}/{file}", 'rb'))
+        with open(f"{directory}/{file}", 'rb') as file_handler:
+            document = file_handler.read()
+        bot.send_document(chat_id=chat_id, document=document)
         time.sleep(hours_num*60*60)
         hours_num = int(os.getenv('HOURS_NUM')) if os.getenv('HOURS_NUM') else hours_num
     post_images(bot=bot, chat_id=chat_id, directory=directory, hours_num=hours_num)
