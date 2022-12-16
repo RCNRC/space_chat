@@ -8,11 +8,11 @@ import time
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Script starts the telegram bot.")
-    parser.add_argument('hours_num', nargs='?', help="the number of hours between file uploads.")
+    parser.add_argument('hours_num', nargs='?', default=4, help="the number of hours between file uploads.")
     return parser.parse_args()
 
 
-def posting_random_image(bot, chat_id, directory="images", hours_num=4):
+def posting_random_image(bot, chat_id, hours_num, directory="images", ):
     files = os.walk(f"./{directory}")
     files = next(files)[2]
     shuffle(files)
@@ -28,8 +28,7 @@ def main():
     bot = telegram.Bot(token=api_key)
     chat_id = dotenv_values(".env")["CHAT_ID"]
     arguments = get_arguments()
-    hours_num = int(arguments.hours_num) if arguments.hours_num else 4
-    posting_random_image(bot=bot, chat_id=chat_id, hours_num=hours_num)
+    posting_random_image(bot=bot, chat_id=chat_id, hours_num=int(arguments.hours_num))
 
 
 if __name__ == '__main__':

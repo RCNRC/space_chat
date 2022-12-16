@@ -5,7 +5,9 @@ import argparse
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Script downloads images from SpaceX news in \"./image\" directory.")
-    parser.add_argument('news_id', nargs='?', help="this is a unique identifier for the news of SpaceX company.")
+    parser.add_argument('news_id', nargs='?', default="latest",
+                        help="this is a unique identifier for the news of SpaceX company."
+                        )
     return parser.parse_args()
 
 
@@ -19,8 +21,7 @@ def fetch_spacex_images(news_id="latest"):
 
 def main():
     arguments = get_arguments()
-    news_id = arguments.news_id if arguments.news_id else "latest"
-    fetch_spacex_images(news_id=news_id)
+    fetch_spacex_images(news_id=arguments.news_id)
 
 
 if __name__ == '__main__':

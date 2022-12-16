@@ -18,7 +18,9 @@ def post_file(bot, chat_id, file, directory="images"):
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Script posts file in telegram chat.")
-    parser.add_argument('file', nargs='?', help="this is the name of the file that will be sent to the telegram chat.")
+    parser.add_argument('file', nargs='?', default=None,
+                        help="this is the name of the file that will be sent to the telegram chat."
+                        )
     return parser.parse_args()
 
 
@@ -26,8 +28,7 @@ def main():
     api_key = dotenv_values(".env")["TELEGRAM_API_KEY"]
     bot = telegram.Bot(token=api_key)
     chat_id = dotenv_values(".env")["CHAT_ID"]
-    file = get_arguments().file if get_arguments().file else None
-    post_file(bot=bot, chat_id=chat_id, file=file)
+    post_file(bot=bot, chat_id=chat_id, file=get_arguments().file)
 
 
 if __name__ == '__main__':
