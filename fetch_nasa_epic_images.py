@@ -12,12 +12,12 @@ def fetch_nasa_epic_images(api_token, images_number=10):
     response = requests.get(api_endpoint, params=payload)
     response.raise_for_status()
 
-    for i in range(images_number):
-        image_id = response.json()[i]["image"]
-        date_time = datetime.datetime.fromisoformat(response.json()[i]["date"])
+    for image_number in range(images_number):
+        image_id = response.json()[image_number]["image"]
+        date_time = datetime.datetime.fromisoformat(response.json()[image_number]["date"])
         download_image(
             image_url=f"{api_archive_endpoint}{date_time.year}/{date_time.month}/{date_time.day}/png/{image_id}.png",
-            image_name=f"nasa_epyc_{i}", params=payload
+            image_name=f"nasa_epyc_{image_number}", params=payload
         )
 
 
