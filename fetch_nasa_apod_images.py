@@ -8,9 +8,9 @@ def fetch_nasa_apod_images(api_token, images_number=40):
     payload = {"count": f"{images_number}", "api_key": f"{api_token}"}
     response = requests.get(api_endpoint, params=payload)
     response.raise_for_status()
-    for image_number, json_element in enumerate(response.json()):
-        if(json_element["media_type"]=="image"):
-            download_image(image_url=json_element["url"], image_name=f"nasa_apod_{image_number}")
+    for image_number, news_json in enumerate(response.json()):  # news_json is one piece of news in json format
+        if news_json["media_type"] == "image":
+            download_image(image_url=news_json["url"], image_name=f"nasa_apod_{image_number}")
 
 
 def main():
